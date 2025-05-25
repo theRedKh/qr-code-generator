@@ -1,7 +1,8 @@
 # QR Code Generator
  A GUI QR code generator made using `Python`
  
- ##📘 Libraries/Modules
+ ## 📘 Libraries/Modules
+  ### Version 1.0
   - `tkinter`
   - `pillow`
   - `os`
@@ -22,6 +23,8 @@
 
 ## Updates:
  - **version 1.0** - uploaded Feb 19th 2024
+ - **version 2.0** - Web Version with React and Flask
 
 ## Running it locally:
-- TBA
+- Version 1.0: clone the repo, open the folder in terminal and run `python qrCodeGenerator-tkinter.py` or `py qrCodeGenerator-tkinter.py`
+- Version 2.0: TBA
