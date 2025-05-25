@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import './App.css';
+import Header from './components/Header';
+import TextInput from './components/TextInput';
+import ColorPicker from './components/ColorPicker';
+import QRCodeDisplay from './components/QRCodeDisplay';
+import Button from './components/Button';
 
 function App() {
   const [imageURL, setImageUrl] = useState(null);
   const [inputText, setInputText] = useState('');
   const [fillColor, setFillColor] = useState('#000000'); // default black
   const [bgColor, setBgColor] = useState('#FFFFFF'); // default white
+  const [loading, setLoading] = useState(false);
 
   const handleGenerate = async () => {
+    setLoading(true); //set loading to true
     try {
       const response = await fetch('http://localhost:5000/generate', {
         method: 'POST', //SENDING data to server
@@ -36,38 +43,40 @@ function App() {
     catch (error) {
       console.error('Error generating QR code:', error);      
     }
+    finally {
+      setLoading(false); //set loading to false
+    }
   };
 
   return (
     <>
+      <Header/>
       <div>
-        <h1>Hello from QR Code Generator</h1>
-        <p>Type your text in the field, and click Generate to watch the magic happen</p>
-      </div>
-      <div>
-        <input 
-          type="text"
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          placeholder="Enter text here" 
+        <TextInput
+          inputText={inputText}
+          setInputText={setInputText}
         />
-        <button onClick={handleGenerate}>Generate</button>
+        {loading ? (
+          <div className='spinner'></div>
+        ) : (
+          <Button onClick={handleGenerate} label="Generate"/>
+        )}
       </div>
       <div>
-        <input 
-          type="color"
-          value={fillColor}
-          onChange={(e) => setFillColor(e.target.value)}
+        <ColorPicker
+          label="Fill Color: "
+          color={fillColor}
+          onChange={setFillColor} 
           title="Select fill color (QR code Dots)"
-        />
-        <input
-          type="color" 
-          value={bgColor}
-          onChange={(e) => setBgColor(e.target.value)}
-          title="Select background color (QR code Background)"
-        />
+          />
+          <ColorPicker
+            label="Background Color: "
+            color={bgColor}
+            onChange={setBgColor}
+            title="Select background color (QR code Background)"
+          />
       </div>
-      {imageURL && <img src={imageURL} alt="Generated QR Code" />}
+      <QRCodeDisplay imageURL={imageURL}/>
     </>
   );
 }
