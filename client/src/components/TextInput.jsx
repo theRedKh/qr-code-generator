@@ -1,6 +1,7 @@
 function TextInput({ inputText, setInputText}) {
     return(
-        <input 
+        <input
+          className="action"
           type="text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}

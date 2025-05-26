@@ -1,6 +1,6 @@
 function Button({ onClick, label }){
     return(
-        <button onClick={onClick}>{label}</button>
+        <button className="actionBtn" onClick={onClick}>{label}</button>
     );
 }
 

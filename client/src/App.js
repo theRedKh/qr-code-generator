@@ -51,30 +51,32 @@ function App() {
   return (
     <>
       <Header/>
-      <div>
-        <TextInput
-          inputText={inputText}
-          setInputText={setInputText}
-        />
-        {loading ? (
-          <div className='spinner'></div>
-        ) : (
-          <Button onClick={handleGenerate} label="Generate"/>
-        )}
-      </div>
-      <div>
-        <ColorPicker
-          label="Fill Color: "
-          color={fillColor}
-          onChange={setFillColor} 
-          title="Select fill color (QR code Dots)"
+      <div className="mainInputContainer">
+        <div className='inputContainer1'>
+          <TextInput
+            inputText={inputText}
+            setInputText={setInputText}
           />
+          {loading ? (
+            <div className='spinner'></div>
+          ) : (
+            <Button onClick={handleGenerate} label="Generate"/>
+          )}
+        </div>
+        <div className='inputContainer2'>
           <ColorPicker
-            label="Background Color: "
-            color={bgColor}
-            onChange={setBgColor}
-            title="Select background color (QR code Background)"
-          />
+            label="Fill"
+            color={fillColor}
+            onChange={setFillColor} 
+            title="Select fill color (QR code Dots)"
+            />
+            <ColorPicker
+              label="Background"
+              color={bgColor}
+              onChange={setBgColor}
+              title="Select background color (QR code Background)"
+            />
+        </div>
       </div>
       <QRCodeDisplay imageURL={imageURL}/>
     </>
