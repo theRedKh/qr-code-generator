@@ -43,8 +43,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 50px;
-  padding: 10px;
-  height: 300px;
+  padding: 25px;
+  min-height: 300px;
   color: black;
   background-color: #070733;
   border-radius: 30px;
@@ -150,5 +150,7 @@ body {
 }
 
 #qr-code-display {
-  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

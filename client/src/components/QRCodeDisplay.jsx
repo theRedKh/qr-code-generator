@@ -5,7 +5,8 @@ function QRCodeDisplay( { imageURL }){
         imageURL && (
         <div id="qr-code-display">
           <img src={imageURL} alt="Generated QR Code" />
-          <Button onClick={() => {
+          <Button 
+          onClick={() => {
             const link = document.createElement('a');
             link.href = imageURL;
             link.download = 'qr-code.png'; // name of the downloaded file
