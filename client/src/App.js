@@ -16,7 +16,7 @@ function App() {
   const handleGenerate = async () => {
     setLoading(true); //set loading to true
     try {
-      const response = await fetch('http://localhost:5000/generate', {
+      const response = await fetch('simple-qr-code-generator-atg4f7agc7gbb5en.canadacentral-01.azurewebsites.net/generate', {
         method: 'POST', //SENDING data to server
         headers: {
           'Content-Type': 'application/json', //sending JSON data to server
