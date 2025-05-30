@@ -3,7 +3,7 @@ import Button from './Button';
 function QRCodeDisplay( { imageURL }){
     return (
         imageURL && (
-        <div>
+        <div id="qr-code-display">
           <img src={imageURL} alt="Generated QR Code" />
           <Button onClick={() => {
             const link = document.createElement('a');

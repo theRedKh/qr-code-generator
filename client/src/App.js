@@ -77,8 +77,8 @@ function App() {
               title="Select background color (QR code Background)"
             />
         </div>
+        <QRCodeDisplay imageURL={imageURL}/>
       </div>
-      <QRCodeDisplay imageURL={imageURL}/>
     </>
   );
 }
