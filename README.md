@@ -1,5 +1,6 @@
 # QR Code Generator
- A GUI QR code generator made using `Python`
+ A GUI QR code generator made using `Python` + `Flask` + `React`
+ - Update 30th May 2025 - The site is officially live!
  
  ## 📘 Libraries/Modules
   ### Version 1.0
@@ -34,6 +35,6 @@
  - **version 1.0** - uploaded Feb 19th 2024
  - **version 2.0** - Web Version with React and Flask
 
-## Running it locally:
+## Running it locally/Acessing:
 - Version 1.0: clone the repo, open the folder in terminal and run `python qrCodeGenerator-tkinter.py` or `py qrCodeGenerator-tkinter.py`
-- Version 2.0: TBA
+- Version 2.0: Access via [this link](https://qr-code-generator-bay-mu.vercel.app/)
