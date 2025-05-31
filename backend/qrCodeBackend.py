@@ -6,14 +6,25 @@ import io #handle image data in memory instead of directly saving to disk
 from PIL import Image #work with images
 import bleach #sanitize input text
 import re #regular expressions library - specific patterns in strings - using for XSS check
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address #prevent overloading server by limiting requests
+
 
 HEX_COLOR_RE = re.compile(r'^#([A-Fa-f0-9]{6})$') #define pattern for hex colors
 
 #Create new Flask app
 app = Flask(__name__)
+
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["10 per minute"]
+)
+
 CORS(app) #enable for all routes
 #Create URL endpoint that accepts POST requests
 @app.route("/generate", methods=['POST'])
+@limiter.limit("5 per minute")
 #Generate QR code button function
 def generate_qr():
     data = request.json.get("data", "").strip() #grabs JSON from frontend

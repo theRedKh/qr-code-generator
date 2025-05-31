@@ -5,3 +5,4 @@ Pillow==11.2.1
 bleach==6.2.0
 itsdangerous==2.2.0
 gunicorn
+Flask-Limiter == 3.12
