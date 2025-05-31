@@ -26,10 +26,17 @@
  - Using widgets and the grid layout system of `tkinter`
  - Dealing with images in `pillow`
  - Saving and deleting files using `os`
+ - Intro to `React`, component logic and lifecycles
+ - Basic API development using `Flask`
+ - Input sanitization using `bleach` and pattern checking using `re`
+ - Handling image data in memory instead of directly saving to disk using `io`
+ - How to deploy frontend using `Vercel` and backend using `Render`
 
 ## To make this project better, the next update will have:
  - user control over where the file gets saved `done`
- - converting it to a web app hosted online
+ - converting it to a web app hosted online `done`
+ - more file formats
+ - update to security - preventing overload
 
 ## Updates:
  - **version 1.0** - uploaded Feb 19th 2024
