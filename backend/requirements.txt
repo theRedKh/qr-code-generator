@@ -4,3 +4,4 @@ qrcode==8.2
 Pillow==11.2.1
 bleach==6.2.0
 itsdangerous==2.2.0
+gunicorn
