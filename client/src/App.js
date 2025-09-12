@@ -83,7 +83,7 @@ function App() {
             </div>
 
             {/* Transparent Background Toggle */}
-            <div className="transparentBgToggle">
+            <div className="transparentBgToggle" style={{ display: 'none'}}>
               <label>
                 <input
                   type="checkbox"
