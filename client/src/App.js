@@ -71,12 +71,16 @@ function App() {
             onChange={setFillColor} 
             title="Select fill color (QR code Dots)"
             />
-            <ColorPicker
-              label="Background"
-              color={bgColor}
-              onChange={setBgColor}
-              title="Select background color (QR code Background)"
-            />
+            <div style={{ opacity: transparentBg ? 0.5 : 1 }}>
+              {/* If transparentBg is true, reduce opacity to indicate disabled state */}
+              <ColorPicker
+                label="Background"
+                color={bgColor}
+                onChange={setBgColor}
+                title="Select background color (QR code Background)"
+                disabled={transparentBg}  // Disable if transparent background is selected
+              />
+            </div>
 
             {/* Transparent Background Toggle */}
             <div className="transparentBgToggle">
