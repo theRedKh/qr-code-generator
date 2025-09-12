@@ -1,4 +1,4 @@
-# Backend qr-code-generator version 2.1
+# Backend qr-code-generator version 2.2
 from flask import Flask, request, send_file, jsonify
 from flask_cors import CORS
 import qrcode
@@ -49,22 +49,23 @@ def generate_qr():
     qr.add_data(data)
     qr.make()
 
-    # 🔥 Make image RGBA so we can add transparency later
-    # If transparent=True, back_color is temporarily white so we can replace it with transparency
+    # 🔥 Create image in RGB mode first, then convert to RGBA for transparency
     img = qr.make_image(
         fill_color=fill_color,
-        back_color=(back_color if not transparent else "white")
+        back_color=(back_color if not transparent else "white")  # white placeholder
     ).convert("RGBA")
 
-    # 🔥 If transparent=True, make white pixels fully transparent
+    # 🔥 If transparent is requested, replace "almost white" pixels with transparency
     if transparent:
         datas = img.getdata()
         new_data = []
         for item in datas:
-            if item[:3] == (255, 255, 255):  # white pixel
+            r, g, b, a = item
+            # Treat any pixel that is close to white as background
+            if r > 250 and g > 250 and b > 250:
                 new_data.append((255, 255, 255, 0))  # fully transparent
             else:
-                new_data.append(item)  # keep original color (fill_color)
+                new_data.append(item)  # preserve fill color
         img.putdata(new_data)
 
     buf = io.BytesIO()
