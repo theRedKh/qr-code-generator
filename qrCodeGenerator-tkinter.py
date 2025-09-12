@@ -56,11 +56,25 @@ def fN_click():
     global fileName
     global qr
     fileName = newEntry.get() + ".png"
-    image = qr.make_image(fill_color = 'black', back_color = 'white')
-    image.save(fileName) #To change path saved, add [directory + imagename.png or imagename.jpg] in quotes
+
+    # Create image in RGB and convert to RGBA
+    image = qr.make_image(fill_color='black', back_color='white').convert("RGBA")
+
+    # 🔥 Make white pixels transparent
+    datas = image.getdata()
+    new_data = []
+    for item in datas:
+        r, g, b, a = item
+        if r > 250 and g > 250 and b > 250:  # almost white
+            new_data.append((255, 255, 255, 0))  # fully transparent
+        else:
+            new_data.append(item)
+    image.putdata(new_data)
+
+    image.save(fileName)
     global completed
-    completed = Label(root, text = "File Saved", fg = 'green')
-    completed.grid(row = 7, column = 1, columnspan = 2)
+    completed = Label(root, text="File Saved", fg='green')
+    completed.grid(row=7, column=1, columnspan=2)
     completed['font'] = f_messages
     image.show(fileName)
 
