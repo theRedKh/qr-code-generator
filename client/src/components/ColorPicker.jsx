@@ -1,4 +1,4 @@
-function ColorPicker({ label, color, onChange, title }){
+function ColorPicker({ label, color, onChange, title, disabled }){
     return(
         <div className="color-container">
             <input
@@ -7,6 +7,7 @@ function ColorPicker({ label, color, onChange, title }){
             value={color}
             onChange={(e) => onChange(e.target.value)}
             title={title}
+            disabled={disabled}
             />
             <label>{label}</label>
         </div>
