@@ -11,8 +11,8 @@ function App() {
   const [inputText, setInputText] = useState('');
   const [fillColor, setFillColor] = useState('#000000'); // default black
   const [bgColor, setBgColor] = useState('#FFFFFF'); // default white
+  const [transparentBg, setTransparentBg] = useState(false); //new state for transparent bg
   const [loading, setLoading] = useState(false);
-
   const handleGenerate = async () => {
     setLoading(true); //set loading to true
     try {
@@ -24,7 +24,8 @@ function App() {
         body: JSON.stringify({ 
           data: inputText, //convert input to JSON string
           fill_color: fillColor, //convert input to JSON string
-          back_color: bgColor //convert input to JSON string
+          back_color: bgColor, //convert input to JSON string
+          transparent_bg: transparentBg //send toggle to backend
         }), 
       });
 
@@ -76,6 +77,18 @@ function App() {
               onChange={setBgColor}
               title="Select background color (QR code Background)"
             />
+
+            {/* Transparent Background Toggle */}
+            <div className="transparentBgToggle">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={transparentBg}
+                  onChange={(e) => setTransparentBg(e.target.checked)}
+                />
+                Transparent Background
+              </label>
+            </div>
         </div>
         <QRCodeDisplay imageURL={imageURL}/>
       </div>
