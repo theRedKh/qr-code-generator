@@ -30,7 +30,7 @@ def generate_qr():
     data = request.json.get("data", "").strip() #grabs JSON from frontend
     fill_color = request.json.get("fill_color", "black")
     back_color = request.json.get("back_color", "white")
-
+    transparent = request.json.get("transparent_bg", False) #new field
     #validate inputs
     if not data:
         return jsonify({"error": "No text provided"}), 400 #check if user forgot to send text, HTTP status 400 error
@@ -41,10 +41,25 @@ def generate_qr():
     if not is_valid_color(fill_color) or not is_valid_color(back_color):
         return jsonify({"error": "Invalid color format"}), 400
     
+    if not transparent and not is_valid_color(back_color):
+        return jsonify({"error": "Invalid back color format"}), 400
+    
     qr = qrcode.QRCode(version=1, box_size=5, border=5)
     qr.add_data(data)
     qr.make() #finalize layout
-    img = qr.make_image(fill_color=fill_color, back_color=back_color) #black and white PNG
+    
+    img = qr.make_image(fill_color=fill_color, back_color=(back_color if not transparent else "white")).convert("RGBA") #black and white PNG
+    
+    if transparent:
+        datas = img.getdata()
+        new_data = []
+        for item in datas:
+            if item[:3] == (255, 255, 255): #white
+                new_data.append((255, 255, 255, 0)) #transparent
+            else:
+                new_data.append(item)
+        img.putdata(new_data)
+        
     buf = io.BytesIO() #in memory file creation
     img.save(buf, format="PNG")
     buf.seek(0)  #rewind memory buffer to beginning so Flask can see it
